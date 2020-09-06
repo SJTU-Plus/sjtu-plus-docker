@@ -1,0 +1,50 @@
+version: "3"
+services:
+  sjtu-plus:
+    restart: always
+    networks:
+      - wsgi_net
+      - plus_net
+    build: ./sjtu-plus
+    image: sjtu-plus/sjtu-plus:1.0
+    expose:
+      - 5000
+    environment:
+      - SECRET_KEY=RSOnBm9YWO0jqOyCYgyn0GiH2n9J8Cv8IYctYm2ny44jHpZRyi
+      - ALLOWED_HOST=localhost
+      - POSTGRES_PASSWORD=vrv4baZS5aIdULIoIpV1VzEnE7MYdt7mhnxHEFq3WPRaxPYHyF
+    volumes:
+      - "./statics/static:/data"
+    depends_on:
+      - postgres-db
+
+  caddy:
+    restart: always
+    networks: 
+      - wsgi_net
+    build: ./caddy
+    volumes:
+      - "./statics:/srv:ro"
+    depends_on: 
+      - sjtu-plus
+    ports: 
+      - 80:80
+      - 443:443
+
+  postgres-db:
+    image: postgres
+    networks:
+      - plus_net
+    expose:
+      - 5432
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=vrv4baZS5aIdULIoIpV1VzEnE7MYdt7mhnxHEFq3WPRaxPYHyF
+      - POSTGRES_USER=sjtu-plus
+      - PGDATA=/data/database
+    volumes:
+      - "./data:/data"
+
+networks:
+  wsgi_net:
+  plus_net:

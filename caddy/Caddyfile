@@ -1,0 +1,11 @@
+:80 {
+    @s {
+        not path /static/*
+        not path /course-plus/*
+        not path /course-plus-data/*
+    }
+    encode gzip
+    reverse_proxy @s sjtu-plus:5000
+    root * /srv
+    file_server
+}
