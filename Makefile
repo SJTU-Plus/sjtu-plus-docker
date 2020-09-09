@@ -1,7 +1,12 @@
-dev:
+build:
 	docker-compose build sjtu-plus
-	./migrate.sh
+
+dev: build
+	docker-compose build sjtu-plus
 	docker-compose run -p 8080:8080 sjtu-plus sh -c "DEBUG=true python manage.py runserver 0.0.0.0:8080"
+
+migrate:
+	./migrate.sh
 
 stop:
 	docker-compose stop
@@ -18,3 +23,12 @@ update:
 
 admin:
 	docker-compose run sjtu-plus python manage.py createsuperuser
+
+dump:
+	docker-compose run sjtu-plus python manage.py dumpdata
+
+load: build
+	docker-compose run sjtu-plus python manage.py loaddata "data/backup.json"
+
+test: build
+	docker-compose run --no-dep sjtu-plus sh -c "CI=true tools/test.sh"
