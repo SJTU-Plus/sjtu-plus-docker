@@ -2,4 +2,7 @@
 
 set -e
 
-docker-compose run --rm --service-ports sjtu-plus sh -c "python manage.py makemigrations && python manage.py showmigrations && python manage.py migrate"
+docker-compose run --rm --service-ports sjtu-plus sh -c "\
+    python app/manage.py makemigrations && \
+    python app/manage.py showmigrations && \
+    python app/manage.py migrate"
