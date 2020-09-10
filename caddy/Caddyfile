@@ -1,8 +1,8 @@
 :80 {
     @s {
         not path /static/*
-        not path /course-plus/*
-        not path /course-plus-data/*
+        not path /course-plus*
+        not path /course-plus-data*
     }
     encode gzip
     reverse_proxy @s sjtu-plus:5000

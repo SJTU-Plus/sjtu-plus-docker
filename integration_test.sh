@@ -2,8 +2,8 @@
 
 set -ex
 
-curl -sSL http://localhost/
-curl -sSL http://localhost/course-plus
-curl -sSL http://localhost/subjects
-curl -sSL http://localhost/websites
-curl -sSL http://localhost/admin
+curl -fsSL http://localhost/ > /dev/null
+curl -fsSL http://localhost/course-plus > /dev/null
+curl -fsSL http://localhost/subjects > /dev/null
+curl -fsSL http://localhost/websites > /dev/null
+curl -fsSL http://localhost/admin > /dev/null
