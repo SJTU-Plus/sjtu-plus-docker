@@ -21,7 +21,11 @@ jobs:
       - name: Start Database
         run: docker-compose up -d postgres-db
       - name: Update
-        run ./update.sh
+        run: ./update.sh
       - name: Test
+        run: make test
+      - name: Integration Test
         run: |
-          make test
+          docker-compose up -d sjtu-plus
+          ./integration_test.sh
+      
