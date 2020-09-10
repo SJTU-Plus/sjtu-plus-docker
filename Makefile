@@ -32,4 +32,3 @@ load: build
 
 test: build
 	docker-compose run --no-dep sjtu-plus sh -c "CI=true cd app && tools/test.sh"
-	docker-compose up -d sjtu-plus

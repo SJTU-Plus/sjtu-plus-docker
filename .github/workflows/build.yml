@@ -16,12 +16,12 @@ jobs:
         run: |
           echo "POSTGRES_USER=sjtu-plus" > secrets/postgres-db.env
           touch secrets/sjtu-plus.env
+      - name: Init
+        run: ./init.sh
       - name: Start Database
         run: docker-compose up -d postgres-db
-      - name: Build
-        run: |
-          ./init.sh
-          ./update.sh
+      - name: Update
+        run ./update.sh
       - name: Test
         run: |
           make test
