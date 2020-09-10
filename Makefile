@@ -31,4 +31,5 @@ load: build
 	docker-compose run sjtu-plus python app/manage.py loaddata "app/data/test_data.json"
 
 test: build
-	docker-compose run --no-dep sjtu-plus sh -c "CI=true tools/test.sh"
+	docker-compose run --no-dep sjtu-plus sh -c "CI=true cd app && tools/test.sh"
+	docker-compose up -d sjtu-plus

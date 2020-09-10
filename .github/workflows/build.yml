@@ -16,3 +16,9 @@ jobs:
         run: |
           ./init.sh
           ./update.sh
+      - name: Test
+        run: |
+          touch secrets/postgres-db.env
+          touch secrets/sjtu-plus.env
+          make test
+
