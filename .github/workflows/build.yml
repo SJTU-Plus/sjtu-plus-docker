@@ -27,6 +27,6 @@ jobs:
         run: make test
       - name: Integration Test
         run: |
-          docker-compose up -d sjtu-plus
+          docker-compose up -d --build caddy
           ./integration_test.sh
       

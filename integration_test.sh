@@ -2,8 +2,8 @@
 
 set -e
 
-curl -sSL http://localhost:8080/
-curl -sSL http://localhost:8080/course-plus
-curl -sSL http://localhost:8080/subjects
-curl -sSL http://localhost:8080/websites
-curl -sSL http://localhost:8080/admin
+curl -sSL http://localhost/
+curl -sSL http://localhost/course-plus
+curl -sSL http://localhost/subjects
+curl -sSL http://localhost/websites
+curl -sSL http://localhost/admin
