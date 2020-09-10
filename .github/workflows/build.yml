@@ -18,7 +18,7 @@ jobs:
           ./update.sh
       - name: Test
         run: |
-          touch secrets/postgres-db.env
+          echo "POSTGRES_USER=sjtu-plus" > secrets/postgres-db.env
           touch secrets/sjtu-plus.env
           make test
 
