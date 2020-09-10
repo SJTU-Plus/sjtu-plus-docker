@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 curl -sSL http://localhost/
 curl -sSL http://localhost/course-plus
