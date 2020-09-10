@@ -12,13 +12,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.1
+      - name: Prepare
+        run: |
+          echo "POSTGRES_USER=sjtu-plus" > secrets/postgres-db.env
+          touch secrets/sjtu-plus.env
       - name: Build
         run: |
           ./init.sh
           ./update.sh
       - name: Test
         run: |
-          echo "POSTGRES_USER=sjtu-plus" > secrets/postgres-db.env
-          touch secrets/sjtu-plus.env
           make test
-
