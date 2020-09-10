@@ -14,6 +14,7 @@ services:
       - ./secrets/sjtu-plus.env
     volumes:
       - "./statics/static:/data"
+      - "./sjtu-plus:/root/app"
     depends_on:
       - postgres-db
 

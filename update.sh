@@ -11,7 +11,7 @@ echo "updating sjtu-plus..."
 echo "rebuild sjtu-plus..."
 docker-compose build sjtu-plus
 echo "updating sjtu-plus data files..."
-docker-compose run --rm sjtu-plus sh -c "rm -rf /data/* && python manage.py collectstatic --noinput"
+docker-compose run --rm sjtu-plus sh -c "rm -rf /data/* && python app/manage.py collectstatic --noinput"
 echo "updating sjtu-plus database..."
 ./migrate.sh
 
