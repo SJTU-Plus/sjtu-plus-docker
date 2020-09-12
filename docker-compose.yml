@@ -72,6 +72,23 @@ services:
       - PGDATA=/data/database
     volumes:
       - "./data:/data"
+  
+  grafana:
+    image: grafana/grafana
+    user: root
+    networks:
+      - wsgi_net
+      - prometheus_net
+    environment:
+      - GF_PATHS_DATA=/data/grafana
+    volumes:
+      - "./data:/data"
+      - "./grafana.ini:/etc/grafana/grafana.ini"
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    restart: always
 
 networks:
   wsgi_net:
