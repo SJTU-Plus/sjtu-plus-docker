@@ -30,3 +30,8 @@ scrape_configs:
   - job_name: 'sjtu_traffic'
     static_configs:
       - targets: ['sjtu-traffic-exporter:9142']
+    relabel_configs:
+      - source_labels: [_address__]
+        regex: '.*'
+        target_label: instance
+        replacement: "exporter:9142"
