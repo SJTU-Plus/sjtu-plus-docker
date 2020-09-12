@@ -30,7 +30,32 @@ services:
     ports: 
       - 80:80
       - 443:443
-
+    
+  sjtu-traffic-exporter:
+    restart: always
+    networks:
+      - prometheus_net
+      - wsgi_net
+    build: ./services/sjtu_traffic_exporter
+    external_links:
+      - "caddy:sjtu-plus.internal"
+    depends_on:
+      - caddy
+    expose:
+      - 9142
+    
+  prometheus:
+    image: prom/prometheus
+    networks:
+      - prometheus_net
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+    depends_on:
+      - sjtu-traffic-exporter
+    ports:
+      - "9090:9090"
+    restart: always
+  
   postgres-db:
     image: postgres
     networks:
@@ -48,3 +73,4 @@ services:
 networks:
   wsgi_net:
   plus_net:
+  prometheus_net:
