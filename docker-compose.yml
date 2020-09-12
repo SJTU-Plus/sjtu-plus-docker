@@ -46,7 +46,8 @@ services:
     
   prometheus:
     image: prom/prometheus
-    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path="/data/prometheus"
+    user: root
+    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/data/prometheus
     networks:
       - prometheus_net
     volumes:
