@@ -55,8 +55,8 @@ services:
       - "./data:/data"
     depends_on:
       - sjtu-traffic-exporter
-    ports:
-      - "9090:9090"
+    expose:
+      - 9090
     restart: always
   
   postgres-db:
@@ -86,8 +86,8 @@ services:
       - "./grafana.ini:/etc/grafana/grafana.ini"
     depends_on:
       - prometheus
-    ports:
-      - "3000:3000"
+    expose:
+      - 3000
     restart: always
 
 networks:
