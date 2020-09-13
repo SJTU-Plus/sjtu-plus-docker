@@ -3,6 +3,7 @@
         not path /static/*
         not path /course-plus*
         not path /course-plus-data*
+        not path /libsjtu*
         not path /monitor*
     }
     @monitor {
