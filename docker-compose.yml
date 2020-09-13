@@ -38,6 +38,8 @@ services:
       - prometheus_net
       - wsgi_net
     build: ./services/sjtu_traffic_exporter
+    environment:
+      - PLUS_HOST=sjtu-plus.internal
     external_links:
       - "caddy:sjtu-plus.internal"
     depends_on:
