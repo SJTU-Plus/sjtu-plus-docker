@@ -25,6 +25,7 @@ services:
     build: ./caddy
     volumes:
       - "./statics:/srv:ro"
+      - "./data:/data"
     depends_on: 
       - sjtu-plus
     ports: 
