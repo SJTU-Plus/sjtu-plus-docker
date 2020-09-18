@@ -5,6 +5,7 @@
         not path /course-plus-data*
         not path /libsjtu*
         not path /monitor*
+        not path /download/*
     }
     @monitor {
         path /monitor*
