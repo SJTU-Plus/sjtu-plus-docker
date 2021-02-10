@@ -13,9 +13,13 @@
     @monitor {
         path /monitor*
     }
+    @captcha_solver {
+        path /captcha-solver*
+    }
     encode gzip
     reverse_proxy @s sjtu-plus:5000
     reverse_proxy @monitor grafana:3000
+    reverse_proxy @captcha_solver captcha-solver:8080
     respond @hidden 404
     root * /srv
     file_server
