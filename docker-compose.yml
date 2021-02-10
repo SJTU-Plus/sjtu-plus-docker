@@ -93,6 +93,15 @@ services:
       - 3000
     restart: on-failure
 
+  captcha-solver:
+    restart: on-failure
+    networks:
+      - wsgi_net
+    build: ./captcha-solver
+    image: captcha-solver/captcha-solver
+    expose:
+      - 8080
+
 networks:
   wsgi_net:
   plus_net:

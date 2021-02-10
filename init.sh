@@ -7,5 +7,6 @@ set -e
 [ ! -d "sjtu-plus" ] && git clone --depth=1 --branch master https://github.com/SJTU-Plus/sjtu-plus sjtu-plus
 [ ! -d "services/sjtu_traffic_exporter" ] && git clone --depth=1 --branch master https://github.com/SJTU-Plus/sjtu_traffic_exporter services/sjtu_traffic_exporter
 [ ! -d "statics/libsjtu" ] && git clone --depth=1 --branch gh-pages https://github.com/SJTU-Plus/libsjtu/ statics/libsjtu
+[ ! -d "captcha-solver" ] && git clone --depth=1 --branch service https://github.com/danyang685/jaccount-captcha-solver captcha-solver
 
 echo "Finished!"
