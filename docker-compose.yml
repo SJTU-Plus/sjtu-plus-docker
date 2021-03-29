@@ -103,39 +103,22 @@ services:
       - 8080
 
   influxdb:
-    image: influxdb:latest
+    image: influxdb:2.0
     expose:
       - 8086
     networks:
       - wsgi_net
       - influxdb_net
     volumes:
-      - influxdb-storage:/var/lib/influxdb
-    environment:
-      - INFLUXDB_DB=db-sjtu-plus
-    env_file:
-      - ./secrets/influx-db.env
-    restart: on-failure
-
-  chronograf:
-    image: chronograf:latest
-    ports:
-      - "127.0.0.1:8888:8888"
-    volumes:
-      - chronograf-storage:/var/lib/chronograf
-    networks:
-      - influxdb_net
-    depends_on:
-      - influxdb
-    environment:
-      - INFLUXDB_URL=http://influxdb:8086
-    env_file:
-      - ./secrets/influx-db.env
+      - influxdb-storage-data:/var/lib/influxdb2
+      - influxdb-storage-config:/etc/influxdb2
     restart: on-failure
 
 volumes:
-  influxdb-storage:
+  influxdb-storage-data:
+  influxdb-storage-config:
   chronograf-storage:
+
 networks:
   wsgi_net:
   plus_net:
