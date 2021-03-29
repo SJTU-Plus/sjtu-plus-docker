@@ -112,10 +112,6 @@ services:
     volumes:
       - influxdb-storage-data:/var/lib/influxdb2
       - influxdb-storage-config:/etc/influxdb2
-    environment:
-      - INFLUXDB_DB=db-sjtu-plus
-    env_file:
-      - ./secrets/influx-db.env
     restart: on-failure
 
 volumes:
