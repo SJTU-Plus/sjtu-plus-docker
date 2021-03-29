@@ -5,6 +5,7 @@
         not path /course-plus-data*
         not path /libsjtu*
         not path /monitor*
+        not path /admin-monitor*
         not path /download/*
     }
     @hidden {
@@ -14,7 +15,7 @@
         path /monitor*
     }
     @monitor_admin {
-        path /monitor-admin*
+        path /admin-monitor*
     }
     @captcha_solver {
         path /captcha-solver*
