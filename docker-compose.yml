@@ -48,6 +48,7 @@ services:
       - 9142
 
   prometheus:
+    user: root
     image: prom/prometheus:v2.25.2
     command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/data/prometheus
     networks:
@@ -62,6 +63,7 @@ services:
     restart: unless-stopped
 
   prometheus-private:
+    user: root
     image: prom/prometheus:v2.25.2
     command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/data/prometheus
     networks:
@@ -89,6 +91,7 @@ services:
       - "./data:/data"
 
   grafana:
+    user: root
     image: grafana/grafana:7.5.1
     networks:
       - wsgi_net
@@ -103,6 +106,7 @@ services:
     restart: unless-stopped
 
   grafana-private:
+    user: root
     image: grafana/grafana:7.5.1
     networks:
       - wsgi_net
