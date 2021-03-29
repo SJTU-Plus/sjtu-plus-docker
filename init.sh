@@ -8,6 +8,6 @@ set -e
 [ ! -d "services/sjtu_traffic_exporter" ] && git clone --depth=1 --branch master https://github.com/SJTU-Plus/sjtu_traffic_exporter services/sjtu_traffic_exporter
 [ ! -d "statics/libsjtu" ] && git clone --depth=1 --branch gh-pages https://github.com/SJTU-Plus/libsjtu/ statics/libsjtu
 [ ! -d "captcha-solver" ] && git clone --depth=1 --branch service https://github.com/danyang685/jaccount-captcha-solver captcha-solver
-[ ! -d "services/influx-everything" ] && git clone --depth=1 https://github.com/SJTU-Plus/influx-everything influx-everything
+[ ! -d "services/influx-everything" ] && git clone --depth=1 https://github.com/SJTU-Plus/influx-everything services/influx-everything
 
 echo "Finished!"
