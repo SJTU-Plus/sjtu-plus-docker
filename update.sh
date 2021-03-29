@@ -9,7 +9,9 @@ echo "updating course-plus-data..."
 echo "updating libsjtu..."
 (cd statics/libsjtu && git fetch && git reset --hard origin/gh-pages)
 echo "updating sjtu_traffic_exporter..."
-(cd services/sjtu_traffic_exporter && git fetch  && git reset --hard origin/master)
+(cd services/sjtu_traffic_exporter && git fetch && git reset --hard origin/master)
+echo "updating influx everything"
+(cd services/influx-everything && git fetch && git reset --hard origin/master)
 echo "updating sjtu-plus..."
 (cd sjtu-plus && git pull)
 echo "rebuild sjtu-plus..."
