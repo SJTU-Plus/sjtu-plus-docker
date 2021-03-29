@@ -120,6 +120,8 @@ services:
     networks:
       - influxdb_net
     restart: unless-stopped
+    env_file:
+      - ./secrets/influx-everything.env
 
 volumes:
   influxdb-storage-data:
