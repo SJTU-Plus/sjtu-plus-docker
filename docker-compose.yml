@@ -48,19 +48,31 @@ services:
       - 9142
 
   prometheus:
-    image: prom/prometheus
-    user: root
+    image: prom/prometheus:v2.25.2
     command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/data/prometheus
     networks:
       - prometheus_net
     volumes:
       - "./prometheus.yml:/etc/prometheus/prometheus.yml"
-      - "./data:/data"
+      - prometheus-storage:/data
     depends_on:
       - sjtu-traffic-exporter
     expose:
       - 9090
     restart: unless-stopped
+
+  prometheus-private:
+    image: prom/prometheus:v2.25.2
+    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/data/prometheus
+    networks:
+      - prometheus_private_net
+    volumes:
+      - "./prometheus.private.yml:/etc/prometheus/prometheus.yml"
+      - prometheus-private-storage:/data
+    expose:
+      - 9090
+    restart: unless-stopped
+
 
   postgres-db:
     image: postgres
@@ -77,18 +89,30 @@ services:
       - "./data:/data"
 
   grafana:
-    image: grafana/grafana
-    user: root
+    image: grafana/grafana:7.5.1
     networks:
       - wsgi_net
       - prometheus_net
-    environment:
-      - GF_PATHS_DATA=/data/grafana
     volumes:
-      - "./data:/data"
-      - "./grafana.ini:/etc/grafana/grafana.ini"
+      - grafana-storage:/var/lib/grafana
+      - "./secrets/grafana.ini:/etc/grafana/grafana.ini"
     depends_on:
       - prometheus
+    expose:
+      - 3000
+    restart: unless-stopped
+
+  grafana-private:
+    image: grafana/grafana:7.5.1
+    networks:
+      - wsgi_net
+      - prometheus_private_net
+      - host_monitor_net
+    volumes:
+      - grafana-private-storage:/var/lib/grafana
+      - "./secrets/grafana-private.ini:/etc/grafana/grafana.ini"
+    depends_on:
+      - prometheus-private
     expose:
       - 3000
     restart: unless-stopped
@@ -127,9 +151,20 @@ volumes:
   influxdb-storage-data:
   influxdb-storage-config:
   chronograf-storage:
+  grafana-storage:
+  grafana-private-storage:
+  prometheus-storage:
+  prometheus-private-storage:
 
 networks:
   wsgi_net:
   plus_net:
   prometheus_net:
   influxdb_net:
+  prometheus_private_net:
+  host_monitor_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      -  subnet: 172.31.0.0/16
