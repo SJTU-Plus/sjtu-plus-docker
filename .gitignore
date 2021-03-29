@@ -3,3 +3,4 @@ sjtu-plus/
 data/
 secrets/
 services/
+captcha-solver/

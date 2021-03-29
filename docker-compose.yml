@@ -140,3 +140,4 @@ networks:
   wsgi_net:
   plus_net:
   prometheus_net:
+  influxdb_net:
