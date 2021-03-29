@@ -18,6 +18,8 @@ jobs:
           echo "POSTGRES_PASSWORD=23333333" >> secrets/postgres-db.env
           touch secrets/influx-everything.env
           touch secrets/sjtu-plus.env
+          touch secrets/grafana-private.ini
+          touch secrets/grafana.ini
       - name: Init
         run: ./init.sh
       - name: Start Database
