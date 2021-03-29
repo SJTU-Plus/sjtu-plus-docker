@@ -16,6 +16,7 @@ jobs:
         run: |
           echo "POSTGRES_USER=sjtu-plus" > secrets/postgres-db.env
           echo "POSTGRES_PASSWORD=23333333" >> secrets/postgres-db.env
+          touch secrets/influx-everything.env
           touch secrets/sjtu-plus.env
       - name: Init
         run: ./init.sh
