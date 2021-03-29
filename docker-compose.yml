@@ -113,7 +113,6 @@ services:
       - influxdb-storage:/var/lib/influxdb
     environment:
       - INFLUXDB_DB=db-sjtu-plus
-      - INFLUXDB_ADMIN_USER=${INFLUXDB_USERNAME}
     env_file:
       - ./secrets/influx-db.env
     restart: on-failure
