@@ -68,6 +68,7 @@ services:
     command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/data/prometheus
     networks:
       - prometheus_private_net
+      - host_monitor_net
     volumes:
       - "./prometheus.private.yml:/etc/prometheus/prometheus.yml"
       - prometheus-private-storage:/data
@@ -111,7 +112,6 @@ services:
     networks:
       - wsgi_net
       - prometheus_private_net
-      - host_monitor_net
     volumes:
       - grafana-private-storage:/var/lib/grafana
       - "./secrets/grafana-private.ini:/etc/grafana/grafana.ini"
