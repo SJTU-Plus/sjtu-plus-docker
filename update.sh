@@ -8,6 +8,8 @@ echo "updating course-plus-data..."
 (cd statics/course-plus-data && git fetch && git reset --hard origin/master)
 echo "updating libsjtu..."
 (cd statics/libsjtu && git fetch && git reset --hard origin/gh-pages)
+echo "updating tools..."
+(cd statics/tools && git fetch && git reset --hard origin/gh-pages)
 echo "updating sjtu_traffic_exporter..."
 (cd services/sjtu_traffic_exporter && git fetch && git reset --hard origin/master)
 echo "updating influx everything"
