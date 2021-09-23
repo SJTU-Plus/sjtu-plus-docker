@@ -2,8 +2,6 @@
 
 set -e
 
-echo "updating sjtu-plus-docker..."
-(cd ./ && git fetch && git reset --hard origin/master)
 echo "updating course-plus..."
 (cd statics/course-plus && git fetch && git reset --hard origin/gh-pages)
 echo "updating course-plus-data..."
@@ -26,4 +24,4 @@ echo "updating sjtu-plus database..."
 ./migrate.sh
 
 echo "rebuild all services..."
-docker-compose up -d --build
+docker-compose build
