@@ -34,6 +34,7 @@
     redir /course-plus /course-plus/
     redir /course-plus-data /course-plus-data/
     redir /tools /tools/
+    redir /libsjtu /libsjtu/
     redir /public /public/
 
     # 公共目录，提供目录浏览和文件下载，暴露 statics/public 下的文件
