@@ -18,9 +18,7 @@ init:
 	./init.sh
 
 update:
-	git pull
 	./update.sh
-	docker-compose up -d --build
 
 admin:
 	docker-compose run sjtu-plus python app/manage.py createsuperuser
