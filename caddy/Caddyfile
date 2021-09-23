@@ -1,4 +1,4 @@
-80 {
+:80 {
     @s {
         not path /static/*
         not path /course-plus/*
