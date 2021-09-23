@@ -1,38 +1,56 @@
 :80 {
-    @s {
+    # Django 项目 sjtu-plus，见 https://github.com/SJTU-Plus/sjtu-plus
+    @sjtu-plus {
         not path /static/*
+        not path /public/*
         not path /course-plus/*
         not path /course-plus-data/*
         not path /tools/*
         not path /libsjtu/*
-        not path /monitor/*
-        not path /admin-monitor/*
-        not path /download/*
     }
-    redir /course-plus /course-plus/ 301
-    redir /course-plus-data /course-plus-data/ 301
-    redir /tools /tools/ 301
-    redir /monitor /monitor/ 301
-    redir /admin-monitor /admin-monitor/ 301
-    redir /download /download/ 301
-    @hidden {
-        path */.*
-    }
+    reverse_proxy @sjtu-plus sjtu-plus:5000
+    
+    # Grafana，校内场馆人流监测
     @monitor {
         path /monitor/*
     }
-    @monitor_admin {
+    reverse_proxy @monitor grafana:3000
+    
+    # Grafana，服务器性能监测
+    @admin-monitor {
         path /admin-monitor/*
     }
-    @captcha_solver {
+    reverse_proxy @admin-monitor grafana-private:3000
+
+    # jAccount 验证码识别服务，见 https://github.com/danyang685/jaccount-captcha-solver
+    @captcha-solver {
         path /captcha-solver/*
     }
-    encode gzip
-    reverse_proxy @s sjtu-plus:5000
-    reverse_proxy @monitor grafana:3000
-    reverse_proxy @monitor_admin grafana-private:3000
-    reverse_proxy @captcha_solver captcha-solver:8080
+    reverse_proxy @captcha-solver captcha-solver:8080
+    
+    # 特色手动加斜杠
+    redir /monitor /monitor/
+    redir /admin-monitor /admin-monitor/
+    redir /course-plus /course-plus/
+    redir /course-plus-data /course-plus-data/
+    redir /tools /tools/
+    redir /public /public/
+
+    # 公共目录，提供目录浏览和文件下载，暴露 statics/public 下的文件
+    @public-root {
+        path /public/*
+    }
+    file_server @public-root browse
+    # handle_path /public/* {
+    #     root * /srv/public
+    # }
+
+    # 通用配置
+    @hidden {
+        path */.*
+    }
     respond @hidden 404
+    encode gzip
     root * /srv
     file_server
 }
