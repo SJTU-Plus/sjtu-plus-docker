@@ -46,6 +46,11 @@
     #     root * /srv/public
     # }
 
+    # 兼容带前端路由的 course-plus
+    route /course-plus/* {
+        try_files {path} /course-plus/
+    }
+
     # 通用配置
     @hidden {
         path */.*
